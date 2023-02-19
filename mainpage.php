@@ -44,8 +44,8 @@ include "./getData.php"
         <button class="newPostButton btn btn-outline-secondary" onclick="newPostDivToggle()">New Post</button>
     </div>
     <div class="newPostDiv">
+        <button class="closeNewPostDiv btn btn-outline-danger" onclick="closeDiv()">X </button>
         <form action="./storeData.php" class="formDiv" method="POST" enctype="multipart/form-data">
-            <button class="closeNewPostDiv btn btn-outline-danger" onclick="closeDiv()">X </button>
             <div class='titleDiv'>
                 <label for='title' class="form-label" style="font-size:20px"> Title</label>
                 <input type="text" class='form-control' name="title" id='title' required>
