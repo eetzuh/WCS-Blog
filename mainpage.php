@@ -47,10 +47,11 @@ include "./getData.php"
         <form action="./storeData.php" class="formDiv" method="POST" enctype="multipart/form-data">
             <button class="closeNewPostDiv btn btn-outline-danger" onclick="closeDiv()">X </button>
             <div class='titleDiv'>
-                <label for='title'class="form-label" style="font-size:20px"> Title</label>
-                <input type="text" class='form-control' name="title" id='title'required>
+                <label for='title' class="form-label" style="font-size:20px"> Title</label>
+                <input type="text" class='form-control' name="title" id='title' required>
             </div>
-            <textarea class='form-control'  name="text" id="text" cols="30" rows="10" placeholder="Add description"></textarea>
+            <textarea class='form-control' name="text" id="text" cols="30" rows="10" placeholder="Add description"
+                onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
             <label for="images" class="uploadImage btn btn-outline-secondary">Add Image</label>
             <input name="image" type="file" accept="image/*" style="visibility:hidden; display:none" id="images">
             <button type="submit" class="submitButton btn btn-outline-success">Post</button>
@@ -63,11 +64,11 @@ include "./getData.php"
         if (key_exists('term', $_GET)) {
             if ($data != null) {
                 $term = strtolower($_GET['term']);
-                $data = array_values(array_filter($data, function ($currentData) use ($term) {
+                $data = array_filter($data, function ($currentData) use ($term) {
                     if (str_contains(strtolower($currentData['text']), $term)) {
                         return $currentData;
                     }
-                }));
+                });
             }
             if ($data == []) {
                 echo "<div class='noPostsFound'>No posts found</div>";
@@ -75,12 +76,22 @@ include "./getData.php"
         }
         ;
         if ($data != null) {
-            for ($i = 0; $i < count(array_values($data)); $i++) {
+            //array filtering puts gaps in array indexes, array values is needed to reset indexes in numerical order so that loop doesn't break
+            $data = array_values($data);
+            for ($i = 0; $i < count($data); $i++) {
                 $numOfInputs = 0;
                 foreach ($data[$i] as $key => $value) {
                     if (count($data[$i]) > 3) {
                         $numOfInputs = count($data[$i]);
                         if ($key == "text") {
+                            // if(substr_count($value,"\r\n")>7){
+                            //     function shortText($string){
+                            //         $valueArray=preg_split("/^\\r\\n$/", $string, 0, PREG_SPLIT_DELIM_CAPTURE);
+                            //         return $valueArray;
+                            //     }
+                            //     $text=var_dump(shortText($value));
+                            // }else{
+        
                             $text = $value;
                         } else if ($key == "image") {
                             $image = $value;
@@ -115,10 +126,13 @@ include "./getData.php"
                             <span style='white-space:pre' class=\"card-text\">$text</span>
                             <p class='postDate'>$dateOfPost</p>
                             <br>
+                            <div class='postButtons'>
                             <form action='deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
+                            <button class='btn btn-outline-secondary'>Edit</button>
+                            </div>
                         </div>
                         </div>";
                 } else {
@@ -129,10 +143,13 @@ include "./getData.php"
                             <span style='white-space:pre' class=\"card-text\">$text</span>
                             <p class='postDate'>$dateOfPost</p>
                             <br>
+                            <div class='postButtons'>
                             <form action='deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
+                            <button class='btn btn-outline-secondary'>Edit</button>
+                            </div>
                         </div>
                         </div>";
                     } else {
@@ -142,10 +159,13 @@ include "./getData.php"
                             <h5 class=\"card-title\">$title</h5>
                             <p class='postDate'>$dateOfPost</p>
                             <br>
+                            <div class='postButtons'>
                             <form action='deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
+                            <button class='btn btn-outline-secondary'>Edit</button>
+                            </div>
                         </div>
                         </div>";
                     }

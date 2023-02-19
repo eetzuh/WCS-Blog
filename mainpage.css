@@ -9,14 +9,14 @@ body {
 .hrBottom{
   margin: 0;
   background-color: rgb(160, 81, 35);
-  height: 5px;
 }
 .hrTop{
   margin-bottom: 0;
   background-color: rgb(160, 81, 35);
 }
 .menu {
-  height: 100px;
+  margin-top: 8px;
+  height: 95px;
   background-color: rgb(202, 191, 178);
   display: flex;
   justify-content: space-between;
@@ -25,22 +25,14 @@ body {
 .homepage{
   margin-left: 150px;
 }
-
+.homepageButton{
+  width:100px;
+  height:35px;
+}
 .searchDiv{
   margin-right: 150px;
   display: flex;
   align-items: center;
-}
-.homepageButton{
-  width:100px;
-  height:35px;
-  border:none
-}
-.logOut{
-  margin-left: 30px;
-  width:100px;
-  height: 35px;
-  margin-top:10px
 }
 .searchField {
   width: 100px;
@@ -59,6 +51,12 @@ body {
   border: none;
   background-color: transparent;
   margin-right: 20px;
+}
+.logOut{
+  margin-left: 30px;
+  width:100px;
+  height: 35px;
+  margin-top:10px
 }
 .newPostButtonDiv {
   display: flex;
@@ -127,8 +125,8 @@ button{
 }
 .postsContainer{
   align-items: center;
- display: grid;
- grid-template-columns: auto auto auto auto auto ;
+ display: flex;
+ flex-wrap: wrap;
  margin-top: 35px;
 }
 .posts{
@@ -159,4 +157,8 @@ button{
 }
 .noPostsFound{
   margin-left: 70px;
+}
+.postButtons{
+  display: flex;
+  justify-content: space-between;
 }
