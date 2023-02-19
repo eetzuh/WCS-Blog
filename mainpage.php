@@ -47,9 +47,10 @@ include "./getData.php"
         <form action="./storeData.php" class="formDiv" method="POST" enctype="multipart/form-data">
             <button class="closeNewPostDiv btn btn-outline-danger" onclick="closeDiv()">X </button>
             <div class='titleDiv'>
-                <input type="text" name="title" id='title' placeholder="Add title" required>
+                <label for='title'class="form-label" style="font-size:20px"> Title</label>
+                <input type="text" class='form-control' name="title" id='title'required>
             </div>
-            <textarea name="text" id="text" cols="30" rows="10" placeholder="Add description"></textarea>
+            <textarea class='form-control'  name="text" id="text" cols="30" rows="10" placeholder="Add description"></textarea>
             <label for="images" class="uploadImage btn btn-outline-secondary">Add Image</label>
             <input name="image" type="file" accept="image/*" style="visibility:hidden; display:none" id="images">
             <button type="submit" class="submitButton btn btn-outline-success">Post</button>
@@ -69,7 +70,7 @@ include "./getData.php"
                 }));
             }
             if ($data == []) {
-                echo "<div class='posts'>No posts found</div>";
+                echo "<div class='noPostsFound'>No posts found</div>";
             }
         }
         ;
