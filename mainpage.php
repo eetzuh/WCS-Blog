@@ -22,7 +22,7 @@ include "./getData.php"
             <hr class="hrTop">
             <div class="menu">
                 <div class="homepage">
-                    <a class="homepageButton btn btn-light" href='/Blog/mainpage.php' ;>Homepage</a>
+                    <a class="btn btn-light" href='./mainpage.php' ;>Homepage</a>
                 </div>
                 <div class="searchDiv">
                     <form action="./mainpage.php" method="get">
@@ -34,12 +34,32 @@ include "./getData.php"
                             </svg>
                         </button>
                     </form>
-                    <a class="btn btn-light" href="/Blog" class="logOut">Log Out</a>
+                    <a class="btn btn-light" href="./" class="logOut">Log Out</a>
                 </div>
             </div>
             <hr class="hrBottom">
         </div>
     </header>
+
+    <!-- MODAL -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit post</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            ...
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
     <div class="newPostButtonDiv">
         <button class="newPostButton btn btn-outline-secondary" onclick="newPostDivToggle()">New Post</button>
     </div>
@@ -78,21 +98,21 @@ include "./getData.php"
         if ($data != null) {
             //array filtering puts gaps in array indexes, array values is needed to reset indexes in numerical order so that loop doesn't break
             $data = array_values($data);
+            function shortText($string){
+                $valueArray=preg_split('/(\\r\\n)/', $string, -1, PREG_SPLIT_DELIM_CAPTURE);
+                return implode(array_slice($valueArray, 0,7));
+            }
             for ($i = 0; $i < count($data); $i++) {
                 $numOfInputs = 0;
                 foreach ($data[$i] as $key => $value) {
                     if (count($data[$i]) > 3) {
                         $numOfInputs = count($data[$i]);
                         if ($key == "text") {
-                            // if(substr_count($value,"\r\n")>7){
-                            //     function shortText($string){
-                            //         $valueArray=preg_split("/^\\r\\n$/", $string, 0, PREG_SPLIT_DELIM_CAPTURE);
-                            //         return $valueArray;
-                            //     }
-                            //     $text=var_dump(shortText($value));
-                            // }else{
-        
+                            if(substr_count($value,"\r\n")>7){
+                                $text=shortText($value). "...";
+                            }else{
                             $text = $value;
+                            }
                         } else if ($key == "image") {
                             $image = $value;
                         } else if ($key == "title") {
@@ -109,7 +129,11 @@ include "./getData.php"
                         }
                         if ($key == 'text') {
                             $userKey = $key;
-                            $text = $value;
+                            if(substr_count($value,"\r\n")>7){
+                                $text=shortText($value). "...";
+                            }else{
+                                $text = $value;
+                            }
                         } else {
                             $userKey = $key;
                             $image = $value;
@@ -131,7 +155,7 @@ include "./getData.php"
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
-                            <button class='btn btn-outline-secondary'>Edit</button>
+                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary'>Edit</button>
                             </div>
                         </div>
                         </div>";
@@ -148,7 +172,7 @@ include "./getData.php"
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
-                            <button class='btn btn-outline-secondary'>Edit</button>
+                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary'>Edit</button>
                             </div>
                         </div>
                         </div>";
@@ -164,7 +188,7 @@ include "./getData.php"
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
-                            <button class='btn btn-outline-secondary'>Edit</button>
+                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary'>Edit</button>
                             </div>
                         </div>
                         </div>";
@@ -179,6 +203,7 @@ include "./getData.php"
         ?>
     </style>
     <script type="text/javascript" src="mainpage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
 </html>
