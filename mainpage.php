@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include "./getData.php"
     ?>
 
@@ -41,24 +41,6 @@ include "./getData.php"
         </div>
     </header>
 
-    <!-- MODAL -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit post</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            ...
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        </div>
-    </div>
-    </div>
 
     <div class="newPostButtonDiv">
         <button class="newPostButton btn btn-outline-secondary" onclick="newPostDivToggle()">New Post</button>
@@ -98,9 +80,10 @@ include "./getData.php"
         if ($data != null) {
             //array filtering puts gaps in array indexes, array values is needed to reset indexes in numerical order so that loop doesn't break
             $data = array_values($data);
-            function shortText($string){
-                $valueArray=preg_split('/(\\r\\n)/', $string, -1, PREG_SPLIT_DELIM_CAPTURE);
-                return implode(array_slice($valueArray, 0,7));
+            function shortText($string)
+            {
+                $valueArray = preg_split('/(\\r\\n)/', $string, -1, PREG_SPLIT_DELIM_CAPTURE);
+                return implode(array_slice($valueArray, 0, 7));
             }
             for ($i = 0; $i < count($data); $i++) {
                 $numOfInputs = 0;
@@ -108,31 +91,28 @@ include "./getData.php"
                     if (count($data[$i]) > 3) {
                         $numOfInputs = count($data[$i]);
                         if ($key == "text") {
-                            if(substr_count($value,"\r\n")>7){
-                                $text=shortText($value). "...";
-                            }else{
-                            $text = $value;
+                            if (substr_count($value, "\r\n") > 7) {
+                                $textValue = $value;
+                                $text = shortText($value) . "...";
+                            } else {
+                                $text = $value;
+                                $textValue = $value;
                             }
-                        } else if ($key == "image") {
-                            $image = $value;
-                        } else if ($key == "title") {
-                            $title = $value;
-                        } else {
-                            $id = $value;
+                            $image = $data[$i]['image'];
+                            $title = $data[$i]['title'];
+                            $id = $data[$i]['id'];
                         }
                     } else {
-                        if ($key == 'title') {
-                            $title = $value;
-                        }
-                        if ($key == 'id') {
-                            $id = $value;
-                        }
+                        $title=$data[$i]['title'];
+                        $id=$data[$i]['id'];
                         if ($key == 'text') {
                             $userKey = $key;
-                            if(substr_count($value,"\r\n")>7){
-                                $text=shortText($value). "...";
-                            }else{
+                            if (substr_count($value, "\r\n") > 7) {
+                                $textValue = $value;
+                                $text = shortText($value) . "...";
+                            } else {
                                 $text = $value;
+                                $textValue = $value;
                             }
                         } else {
                             $userKey = $key;
@@ -143,19 +123,19 @@ include "./getData.php"
                 if ($numOfInputs > 2) {
                     echo "<div class=\"card posts\" style=\"width: 20rem;\">
                     <div class='imgContainer'>
-                        <img src=\"$image\" class=\"card-img-top image\">
+                        <img src=\"$image\" id='image_$id' class=\"card-img-top image\">
                         </div>
                         <div class=\"card-body\">
-                            <h5 class=\"card-title\">$title</h5>
-                            <span style='white-space:pre' class=\"card-text\">$text</span>
-                            <p class='postDate'>$dateOfPost</p>
+                            <h5 class=\"card-title\" id='title_$id'>$title</h5>
+                            <span style='white-space:pre' class=\"card-text\" value=\"$textValue\" id='text_$id'>$text</span>
+                            <p class='postDate'id='date_$id'>$dateOfPost</p>
                             <br>
                             <div class='postButtons'>
                             <form action='deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
-                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary'>Edit</button>
+                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary' onclick=\"getPostData('$id')\">Edit</button>
                             </div>
                         </div>
                         </div>";
@@ -163,47 +143,65 @@ include "./getData.php"
                     if ($userKey == "text") {
                         echo "<div class=\"card posts\" style=\"width: 20rem;\">
                         <div class=\"card-body\">
-                            <h5 class=\"card-title\">$title</h5>
-                            <span style='white-space:pre' class=\"card-text\">$text</span>
-                            <p class='postDate'>$dateOfPost</p>
+                            <h5 class=\"card-title\" id='title_$id'>$title</h5>
+                            <span style='white-space:pre' class=\"card-text\" id='text_$id'>$text</span>
+                            <p class='postDate' id='date_$id'>$dateOfPost</p>
                             <br>
                             <div class='postButtons'>
                             <form action='deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
-                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary'>Edit</button>
+                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary onclick=\"getPostData('$id')\">Edit</button>
                             </div>
                         </div>
                         </div>";
                     } else {
                         echo "<div class=\"card posts\" style=\"width: 20rem;\">
-                        <img src=\"$image\" class=\"card-img-top image\">
+                        <img src=\"$image\" id='image_$id' class=\"card-img-top image\">
                         <div class=\"card-body\">
-                            <h5 class=\"card-title\">$title</h5>
-                            <p class='postDate'>$dateOfPost</p>
+                        <h5 class=\"card-title\" id='title_$id'>$title</h5>
+                            <p class='postDate' id='date_$id'>$dateOfPost</p>
                             <br>
                             <div class='postButtons'>
                             <form action='deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
-                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary'>Edit</button>
+                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary' onclick=\"getPostData('$id')\">Edit</button>
                             </div>
-                        </div>
-                        </div>";
+                            </div>
+                            </div>";
                     }
                 }
             }
         }
         ?>
+        <!-- MODAL -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id='modalBody'>
+                        ...
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <style>
         <?php include "mainpage.css";
         ?>
     </style>
-    <script type="text/javascript" src="mainpage.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./mainpage.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

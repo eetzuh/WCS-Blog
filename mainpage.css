@@ -89,6 +89,7 @@ body {
   width: 100px;
   padding: 5px !important;
   background-color: rgb(241, 241, 241);
+  margin-top: 5px;
 }
 
 .uploadImage:hover {
@@ -159,4 +160,7 @@ button{
 .postButtons{
   display: flex;
   justify-content: space-between;
+}
+#modalBody{
+  padding: 25px !important;
 }
