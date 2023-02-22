@@ -25,6 +25,12 @@ include "./getData.php"
                     <a class="btn btn-light" href='./mainpage.php' ;>Homepage</a>
                 </div>
                 <div class="searchDiv">
+                    <!-- add theme switch -->
+                    <!-- <button class='theme'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-sun-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+                        </svg></button> -->
                     <form action="./mainpage.php" method="get">
                         <input class="searchField" type="text" name="term">
                         <button type="submit" class='searchButton'><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -55,8 +61,8 @@ include "./getData.php"
             <textarea class='form-control' name="text" id="text" cols="30" rows="10" placeholder="Add description"
                 onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
             <label for="images" class="uploadImage btn btn-outline-secondary">Add Image</label>
-            <input name="image" type="file" accept="image/*" onchange='showImage()' id="images">
-            <img id='previewImage'/>
+            <input name="image" type="file" accept="image/*" onchange='showImage()' style="display:none" id="images">
+            <img id='previewImage' />
             <button type="submit" class="submitButton btn btn-outline-success">Post</button>
         </form>
     </div>
@@ -79,7 +85,6 @@ include "./getData.php"
         }
         ;
         if ($data != null) {
-            //array filtering puts gaps in array indexes, array values is needed to reset indexes in numerical order so that loop doesn't break
             $data = array_values($data);
             function shortText($string)
             {
@@ -104,8 +109,8 @@ include "./getData.php"
                             $id = $data[$i]['id'];
                         }
                     } else {
-                        $title=$data[$i]['title'];
-                        $id=$data[$i]['id'];
+                        $title = $data[$i]['title'];
+                        $id = $data[$i]['id'];
                         if ($key == 'text') {
                             $userKey = $key;
                             if (substr_count($value, "\r\n") > 7) {
@@ -141,8 +146,7 @@ include "./getData.php"
                         </div>
                         </div>";
                 } else {
-                    if ($userKey == "text") {
-                        // E R R O R - id string doesn't print quote marks in getPostData function parameter 
+                    if ($userKey == "text") { 
                         echo "<div class=\"card posts\" style=\"width: 20rem;\">
                         <div class=\"card-body\"
                             <h5 class=\"card-title\" value=\"$title\" id='title_$id'>$title</h5>
@@ -154,7 +158,7 @@ include "./getData.php"
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
-                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary onclick=\"getPostData('$id')\">Edit</button>
+                            <button data-bs-toggle='modal' data-bs-target=\"#exampleModal\" class='btn btn-outline-secondary' onclick=\"getPostData('$id')\">Edit</button>
                             </div>
                         </div>
                         </div>";
