@@ -8,10 +8,20 @@ function closeDiv() {
   div.style.display = "none";
 }
 
+//working on image preview, learning how to use Data URLs and file APIs
+function showImage(){
+  let previewImage=document.getElementById('previewImage');
+  let imageFile=document.getElementById('images');
+  let selectedFile= imageFile.files[0]
+  if(selectedFile){
+    let fileReader= new FileReader();
+  }
+}
+
 function getPostData(id){
   let text=document.getElementById('text_'+ id).getAttribute("value");
-  let title=document.getElementById('title_'+ id).innerHTML;
-  let image=document.getElementById('image_'+ id).innerHTML;
+  let title=document.getElementById('title_'+ id).getAttribute("value");
+  let image=document.getElementById('image_'+ id).getAttribute("value");
   let postId= id;
   storeToModal(postId, text, title, image)
 }
@@ -23,7 +33,7 @@ function storeToModal(postId, text, title, image){
   <div class='titleDiv'>
     <input name='postId' type='hidden' value=${postId}</input>
       <label for='title' class="form-label" style="font-size:20px">Title</label>
-      <input type="text" value=${title} class='form-control' name="title" id='title'>
+      <input type="text" value=${title} class='form-control' name="title" id='title' required>
   </div>
   <textarea class='form-control' name="text" id="text" cols="30" rows="10" placeholder="Add description"
       onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">${text}</textarea>

@@ -9,13 +9,13 @@ function storeToDB()
     ;
     $userData = [];
     $userData['id']=uniqid();
-    if(isset($_POST['title'])){
-        $userData['title']=$_POST['title'];
-    }
+    $userData['title']=$_POST['title'];
+
     if (($_FILES['image']['name'] !== "")) {
         $image = $_FILES['image'];
         $imageName = $image['name'];
         $imageTmp = $image['tmp_name'];
+        //add image size limit
         $imageSize = $image['size'];
         $imageError = $image['error'];
         $imageType = $image['type'];
