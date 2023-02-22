@@ -55,7 +55,8 @@ include "./getData.php"
             <textarea class='form-control' name="text" id="text" cols="30" rows="10" placeholder="Add description"
                 onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
             <label for="images" class="uploadImage btn btn-outline-secondary">Add Image</label>
-            <input name="image" type="file" accept="image/*" style="visibility:hidden; display:none" id="images">
+            <input name="image" type="file" accept="image/*" onchange='showImage()' id="images">
+            <img id='previewImage'/>
             <button type="submit" class="submitButton btn btn-outline-success">Post</button>
         </form>
     </div>
@@ -67,7 +68,7 @@ include "./getData.php"
             if ($data != null) {
                 $term = strtolower($_GET['term']);
                 $data = array_filter($data, function ($currentData) use ($term) {
-                    if (str_contains(strtolower($currentData['text']), $term)) {
+                    if (str_contains(strtolower($currentData['text']), $term) || str_contains(strtolower($currentData['title']), $term)) {
                         return $currentData;
                     }
                 });
@@ -123,10 +124,10 @@ include "./getData.php"
                 if ($numOfInputs > 2) {
                     echo "<div class=\"card posts\" style=\"width: 20rem;\">
                     <div class='imgContainer'>
-                        <img src=\"$image\" id='image_$id' class=\"card-img-top image\">
+                        <img src=\"$image\" id='image_$id' value=\"$image\" class=\"card-img-top image\">
                         </div>
                         <div class=\"card-body\">
-                            <h5 class=\"card-title\" id='title_$id'>$title</h5>
+                            <h5 class=\"card-title\" value=\"$title\" id='title_$id'>$title</h5>
                             <span style='white-space:pre' class=\"card-text\" value=\"$textValue\" id='text_$id'>$text</span>
                             <p class='postDate'id='date_$id'>$dateOfPost</p>
                             <br>
@@ -141,10 +142,11 @@ include "./getData.php"
                         </div>";
                 } else {
                     if ($userKey == "text") {
+                        // E R R O R - id string doesn't print quote marks in getPostData function parameter 
                         echo "<div class=\"card posts\" style=\"width: 20rem;\">
-                        <div class=\"card-body\">
-                            <h5 class=\"card-title\" id='title_$id'>$title</h5>
-                            <span style='white-space:pre' class=\"card-text\" id='text_$id'>$text</span>
+                        <div class=\"card-body\"
+                            <h5 class=\"card-title\" value=\"$title\" id='title_$id'>$title</h5>
+                            <span style='white-space:pre' class=\"card-text\" value=\"$textValue\" id='text_$id'>$text</span>
                             <p class='postDate' id='date_$id'>$dateOfPost</p>
                             <br>
                             <div class='postButtons'>
@@ -158,9 +160,9 @@ include "./getData.php"
                         </div>";
                     } else {
                         echo "<div class=\"card posts\" style=\"width: 20rem;\">
-                        <img src=\"$image\" id='image_$id' class=\"card-img-top image\">
+                        <img src=\"$image\" value=\"$textValue\" id='image_$id' class=\"card-img-top image\">
                         <div class=\"card-body\">
-                        <h5 class=\"card-title\" id='title_$id'>$title</h5>
+                        <h5 class=\"card-title\" value=\"$title\" id='title_$id'>$title</h5>
                             <p class='postDate' id='date_$id'>$dateOfPost</p>
                             <br>
                             <div class='postButtons'>

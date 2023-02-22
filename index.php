@@ -16,8 +16,8 @@
     <div class="inputForm">
       <form action="index.php" method="POST">
         <div class="formContainer">
-          <input type="text" id="username" name="username" placeholder="username..." required>
-          <input type="password" id="password" name="password" placeholder="password..." required>
+          <input type="text" id="username" class='form-control' name="username" placeholder="username..." required>
+          <input type="password" id="password" class='form-control' name="password" placeholder="password..." required>
           <div class="warning">
           <?php
           $json = file_get_contents("usersData.json");
