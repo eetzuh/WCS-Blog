@@ -14,13 +14,13 @@
 <body>
   <div class="inputFormContainer">
     <div class="inputForm">
-      <form action="index.php" method="POST">
+      <form action="./index.php" method="POST">
         <div class="formContainer">
           <input type="text" id="username" class='form-control' name="username" placeholder="username..." required>
           <input type="password" id="password" class='form-control' name="password" placeholder="password..." required>
           <div class="warning">
           <?php
-          $json = file_get_contents("usersData.json");
+          $json = file_get_contents("./usersData.json");
           $keys = json_decode($json, true);
           if (isset($_POST["submit"])) {
             $userUsername = $_POST["username"];
@@ -39,7 +39,7 @@
     </div>
   </div>
   <style>
-  <?php include "style.css" ?>
+  <?php include "./style.css" ?>
 </style>
 </body>
 

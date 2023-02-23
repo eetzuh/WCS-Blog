@@ -169,7 +169,15 @@ button{
   display: gird;
   grid-gap:5px
 }
-.previewImage{
+#previewNewPostImage{
   width:200px;
+  height: auto;
+}
+#previewEditPostImage{
+  width: 100px;
+  height: auto;
+  margin-top: 15px;
+}
+#editImageDiv{
   height: auto;
 }

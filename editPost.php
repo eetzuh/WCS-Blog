@@ -1,6 +1,6 @@
 <?php
 
-include 'getData.php';
+include './getData.php';
 
 function storeEditedData()
 {

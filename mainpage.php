@@ -62,10 +62,10 @@ include "./getData.php"
                 onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
             <div class='buttonsWrapper'>
             <label for="images" class="uploadImage btn btn-outline-secondary">Add Image</label>
-            <p class='btn btn-outline-danger' id='removeImageBtn' onclick="previewImage.removeAttribute('src');document.querySelectorAll('#images')[0].value=''">Remove image</p>
+            <p class='btn btn-outline-danger' id='removeImageBtn' onclick="previewNewPostImage.removeAttribute('src');document.querySelectorAll('#images')[0].value=''">Remove image</p>
             </div>
-            <input name="image" type="file" accept="image/*" onchange='showImage()' id="images" style='display:none'>
-            <img class='previewImage' id='previewNewPostImage'/>
+            <input name="image" type="file" accept="image/*" onchange='showNewPostImage()' id="images" style='display:none'>
+            <img class='previewImage' tabindex="-1" id='previewNewPostImage'/>
             <button type="submit" class="submitButton btn btn-outline-success">Post</button>
         </form>
     </div>
@@ -140,7 +140,7 @@ include "./getData.php"
                             <p class='postDate'id='date_$id'>$dateOfPost</p>
                             <br>
                             <div class='postButtons'>
-                            <form action='deletePost.php' method='POST'>
+                            <form action='./deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
@@ -157,7 +157,7 @@ include "./getData.php"
                             <p class='postDate' id='date_$id'>$dateOfPost</p>
                             <br>
                             <div class='postButtons'>
-                            <form action='deletePost.php' method='POST'>
+                            <form action='./deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
@@ -173,7 +173,7 @@ include "./getData.php"
                             <p class='postDate' id='date_$id'>$dateOfPost</p>
                             <br>
                             <div class='postButtons'>
-                            <form action='deletePost.php' method='POST'>
+                            <form action='./deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
                             </form>
@@ -203,7 +203,7 @@ include "./getData.php"
         </div>
     </div>
     <style>
-        <?php include "mainpage.css";
+        <?php include "./mainpage.css";
         ?>
     </style>
     <script type="text/javascript" src="./mainpage.js">

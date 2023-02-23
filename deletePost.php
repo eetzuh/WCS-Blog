@@ -1,5 +1,5 @@
 <?php
-include 'getData.php';
+include './getData.php';
 
 $posts=getDB();
 $posts=array_filter($posts, function ($currentPost){

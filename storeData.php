@@ -1,5 +1,5 @@
 <?php
-include "getData.php";
+include "./getData.php";
 function storeToDB()
 {    
     $currentJson = getDB();
