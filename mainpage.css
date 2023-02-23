@@ -84,17 +84,14 @@ body {
     flex-direction: column;
 }
 .uploadImage {
-  color: black;
-  font-size: large;
-  width: 100px;
-  padding: 5px !important;
+  color: rgb(38, 41, 37);
+  width: 105px;
   background-color: rgb(241, 241, 241);
   margin-top: 5px;
 }
 
 .uploadImage:hover {
   background-color: rgb(132, 158, 150);
-  cursor: pointer;
 }
 #text {
   resize: none;
@@ -163,4 +160,16 @@ button{
 }
 #modalBody{
   padding: 25px !important;
+}
+#removeImageBtn{
+  margin: 0;
+  margin-top: 5px;
+}
+.buttonsWrapper{
+  display: gird;
+  grid-gap:5px
+}
+.previewImage{
+  width:200px;
+  height: auto;
 }
