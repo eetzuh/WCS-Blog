@@ -60,9 +60,12 @@ include "./getData.php"
             </div>
             <textarea class='form-control' name="text" id="text" cols="30" rows="10" placeholder="Add description"
                 onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
+            <div class='buttonsWrapper'>
             <label for="images" class="uploadImage btn btn-outline-secondary">Add Image</label>
+            <p class='btn btn-outline-danger' id='removeImageBtn'>Remove image</p>
+            </div>
             <input name="image" type="file" accept="image/*" onchange='showImage()' style="display:none" id="images">
-            <img id='previewImage' />
+            <img class='previewImage' id='previewNewPostImage'/>
             <button type="submit" class="submitButton btn btn-outline-success">Post</button>
         </form>
     </div>

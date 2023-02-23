@@ -10,7 +10,7 @@ function storeToDB()
     $userData = [];
     $userData['id']=uniqid();
     $userData['title']=$_POST['title'];
-    $userData['data']=date('d/m/y');
+    $userData['date']=date('d/m/y');
     if (($_FILES['image']['name'] !== "")) {
         $image = $_FILES['image'];
         $imageName = $image['name'];
