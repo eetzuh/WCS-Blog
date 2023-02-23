@@ -1,5 +1,6 @@
 let div = document.querySelector(".newPostDiv");
-// let previewImageSelector=document.querySelectorAll('.previewImage');
+//add selector for preview image in modal
+let previewImage=document.getElementById('previewNewPostImage')
 
 function newPostDivToggle() {
   div.style.display = "flex";
@@ -15,7 +16,6 @@ function showImage(){
   // console.log(previewImage)
   let imageFile=document.getElementById('images');
   let selectedFile= imageFile.files[0]
-  let previewImage=document.getElementById('previewNewPostImage')
   if(selectedFile){
     let fileReader= new FileReader();
     fileReader.addEventListener('load', function(){
@@ -38,6 +38,7 @@ function getPostData(id){
 
 function storeToModal(postId, text, title, image){
   let modal= document.getElementById("modalBody")
+  //add remove and preview image option in modal
   modal.innerHTML=
   `<form action="./editPost.php" method="POST" enctype="multipart/form-data">
   <div class='titleDiv'>
