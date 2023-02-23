@@ -94,7 +94,7 @@ include "./getData.php"
             for ($i = 0; $i < count($data); $i++) {
                 $numOfInputs = 0;
                 foreach ($data[$i] as $key => $value) {
-                    if (count($data[$i]) > 3) {
+                    if (count($data[$i]) > 4) {
                         $numOfInputs = count($data[$i]);
                         if ($key == "text") {
                             if (substr_count($value, "\r\n") > 7) {
@@ -126,7 +126,7 @@ include "./getData.php"
                         }
                     }
                 }
-                if ($numOfInputs > 2) {
+                if ($numOfInputs > 4) {
                     echo "<div class=\"card posts\" style=\"width: 20rem;\">
                     <div class='imgContainer'>
                         <img src=\"$image\" id='image_$id' value=\"$image\" class=\"card-img-top image\">
