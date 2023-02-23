@@ -62,10 +62,9 @@ include "./getData.php"
                 onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
             <div class='buttonsWrapper'>
             <label for="images" class="uploadImage btn btn-outline-secondary">Add Image</label>
-            <!-- image preview doesn't work after selecting same image after removal (onchange event) -->
-            <p class='btn btn-outline-danger' id='removeImageBtn' onclick="previewImage.removeAttribute('src')">Remove image</p>
+            <p class='btn btn-outline-danger' id='removeImageBtn' onclick="previewImage.removeAttribute('src');document.querySelectorAll('#images')[0].value=''">Remove image</p>
             </div>
-            <input name="image" type="file" accept="image/*" onchange='showImage()' id="images">
+            <input name="image" type="file" accept="image/*" onchange='showImage()' id="images" style='display:none'>
             <img class='previewImage' id='previewNewPostImage'/>
             <button type="submit" class="submitButton btn btn-outline-success">Post</button>
         </form>

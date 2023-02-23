@@ -1,6 +1,7 @@
 let div = document.querySelector(".newPostDiv");
 //add selector for preview image in modal
-let previewImage=document.getElementById('previewNewPostImage')
+let previewImage=document.getElementById('previewNewPostImage');
+let 
 
 function newPostDivToggle() {
   div.style.display = "flex";
@@ -9,6 +10,8 @@ function newPostDivToggle() {
 function closeDiv() {
   div.style.display = "none";
   previewImage.src="";
+  document.querySelectorAll('#images')[0].value=''
+
 }
 
 function showImage(){
@@ -57,6 +60,5 @@ function storeToModal(postId, text, title, image){
   <button type="submit" class="btn btn-outline-success">Save changes</button>
   </form>
 `
-
-
 }
+
