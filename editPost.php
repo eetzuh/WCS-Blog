@@ -26,7 +26,10 @@ function storeEditedData()
       move_uploaded_file($imageTmp, $imageDestination);
       var_dump("name value");
    }
+   $editedPost=[];
+   $postIndex=0;
    foreach ($oldData as &$selectedPost) {
+      $postIndex++;
       if ($selectedPost['id'] == $id) {
          $selectedPost['id'] = $id;
          $selectedPost['text'] = $text;
@@ -42,8 +45,12 @@ function storeEditedData()
             }
          }
          $selectedPost['date'] = date('d/m/y');
+         $editedPost=$selectedPost;
+         break;
       }
    }
+   array_unshift($oldData, $editedPost);
+   array_splice($oldData, $postIndex, 1);
    $storeNewData = json_encode($oldData);
    file_put_contents("./postData.json", $storeNewData);
 }

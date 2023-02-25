@@ -1,4 +1,5 @@
 let newPostDiv = document.querySelector(".newPostDiv");
+let previewNewPostImage = document.getElementById("previewNewPostImage");
 
 function newPostDivToggle() {
   newPostDiv.style.display = "flex";
@@ -10,7 +11,6 @@ function closeDiv() {
   document.querySelectorAll("#images")[0].value = "";
 }
 
-let previewNewPostImage = document.getElementById("previewNewPostImage");
 function showNewPostImage() {
   let imageFile = document.getElementById("images");
   let selectedFile = imageFile.files[0];
@@ -60,6 +60,12 @@ function storeToModal(postId, text, title, image) {
     <button type="submit" class="btn btn-outline-success">Save changes</button>
     </form>
     `;
+    if(image==null){
+        let previewEditImageDiv= document.getElementById('editImageDiv')
+        previewEditImageDiv.style.height='0'
+      }else{
+        previewEditImageDiv.style.height='auto'
+      }
   }
   
   function showEditPreviewImage() {

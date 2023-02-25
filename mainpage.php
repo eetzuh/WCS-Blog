@@ -1,7 +1,8 @@
 <?php
 
 include "./getData.php"
-    ?>
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +73,6 @@ include "./getData.php"
     <div class="postsContainer">
         <?php
         $data = getDB();
-        $dateOfPost = date('d/m/y');
         if (key_exists('term', $_GET)) {
             if ($data != null) {
                 $term = strtolower($_GET['term']);
@@ -110,10 +110,12 @@ include "./getData.php"
                             $image = $data[$i]['image'];
                             $title = $data[$i]['title'];
                             $id = $data[$i]['id'];
+                            $date=$data[$i]['date'];
                         }
                     } else {
                         $title = $data[$i]['title'];
                         $id = $data[$i]['id'];
+                        $date=$data[$i]['date'];
                         if ($key == 'text') {
                             $userKey = $key;
                             if (substr_count($value, "\r\n") > 7) {
@@ -137,7 +139,7 @@ include "./getData.php"
                         <div class=\"card-body\">
                             <h5 class=\"card-title\" value=\"$title\" id='title_$id'>$title</h5>
                             <span style='white-space:pre' class=\"card-text\" value=\"$textValue\" id='text_$id'>$text</span>
-                            <p class='postDate'id='date_$id'>$dateOfPost</p>
+                            <p class='postDate'id='date_$id'>$date</p>
                             <br>
                             <div class='postButtons'>
                             <form action='./deletePost.php' method='POST'>
@@ -151,10 +153,10 @@ include "./getData.php"
                 } else {
                     if ($userKey == "text") { 
                         echo "<div class=\"card posts\" style=\"width: 20rem;\">
-                        <div class=\"card-body\"
+                        <div class=\"card-body\">
                             <h5 class=\"card-title\" value=\"$title\" id='title_$id'>$title</h5>
                             <span style='white-space:pre' class=\"card-text\" value=\"$textValue\" id='text_$id'>$text</span>
-                            <p class='postDate' id='date_$id'>$dateOfPost</p>
+                            <p class='postDate' id='date_$id'>$date</p>
                             <br>
                             <div class='postButtons'>
                             <form action='./deletePost.php' method='POST'>
@@ -167,10 +169,10 @@ include "./getData.php"
                         </div>";
                     } else {
                         echo "<div class=\"card posts\" style=\"width: 20rem;\">
-                        <img src=\"$image\" value=\"$textValue\" id='image_$id' class=\"card-img-top image\">
+                        <img src=\"$image\" value=\"$image\" id='image_$id' class=\"card-img-top image\">
                         <div class=\"card-body\">
                         <h5 class=\"card-title\" value=\"$title\" id='title_$id'>$title</h5>
-                            <p class='postDate' id='date_$id'>$dateOfPost</p>
+                            <p class='postDate' id='date_$id'>$date</p>
                             <br>
                             <div class='postButtons'>
                             <form action='./deletePost.php' method='POST'>
