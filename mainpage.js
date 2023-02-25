@@ -79,6 +79,7 @@ function storeToModal(postId, text, title, image) {
   function removeEditImage(){
     document.getElementById("previewEditPostImage").removeAttribute('src');
     document.querySelectorAll('#imagesModal')[0].value=''
+    document.querySelectorAll('#previousImage')[0].value='null'
     document.getElementById('editImageDiv').style.height="0px"
   }
   

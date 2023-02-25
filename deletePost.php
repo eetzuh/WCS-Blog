@@ -2,6 +2,11 @@
 include './getData.php';
 
 $posts=getDB();
+foreach($posts as $post){
+    if($_POST['postId']==$post['id']){
+        unlink($post['image']);
+    }
+}
 $posts=array_filter($posts, function ($currentPost){
     return $currentPost['id']!=$_POST['postId'];
 });

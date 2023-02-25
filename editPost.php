@@ -5,6 +5,11 @@ include './getData.php';
 function storeEditedData()
 {
    $oldData = getDB();
+   foreach($oldData as $key => $value ){
+      if($value==""){
+         unset($oldData[$key]);
+      }
+   }
    $title = $_POST['title'];
    $id = $_POST['postId'];
    if (isset($_POST['text'])) {
@@ -31,7 +36,9 @@ function storeEditedData()
          } else {
             if ($_POST['previousImage'] !== "null") {
                $selectedPost['image'] = $_POST['previousImage'];
-               var_dump("gets here");
+            }else{
+               unlink($selectedPost['image']);
+               unset($selectedPost['image']);
             }
          }
          $selectedPost['date'] = date('d/m/y');
