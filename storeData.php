@@ -32,7 +32,7 @@ function storeToDB()
         $userData['text'] = $_POST['text'];
     }
     ;
-    $currentJson[] = $userData;
+    array_unshift($currentJson, $userData);
     $storeData = json_encode($currentJson);
     file_put_contents("./postData.json", $storeData);
 }
