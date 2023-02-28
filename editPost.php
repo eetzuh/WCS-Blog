@@ -31,9 +31,11 @@ function storeEditedData()
    foreach ($oldData as &$selectedPost) {
       $postIndex++;
       if ($selectedPost['id'] == $id) {
-         if(($_POST['title']==$selectedPost['title'])&& ($_POST['text']==$selectedPost['text'])&& $_FILES['image']['name']==""){
-            header('location:./mainpage.php');
-            return;
+         if(($_POST['title']==$selectedPost['title'])&& ($_POST['text']==$selectedPost['text'])){
+            if($_POST['previousImage']!=="null"&& $_FILES['image']['name']==""){
+               header('location:./mainpage.php');
+               return;
+            }
          }
          $selectedPost['id'] = $id;
          $selectedPost['text'] = $text;
