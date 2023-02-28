@@ -49,11 +49,11 @@ function storeToModal(postId, text, title, image) {
   <p class='btn btn-outline-danger' id='removeImageBtn' onclick="removeEditImage()">Remove image</p>
   <input type='text' name='previousImage' id='previousImage' value=${image} style='display:none'>
   <input name="image" value=${image} type="file" accept="image/*" onchange='showEditPreviewImage()' style='display:none' id="imagesModal">
-  <div id='editImageDiv'>
+  <div class='autoHeight' id='editImageDiv'>
   ` +
   (image !== null
-    ? `<img class='previewImage' src=${image} id='previewEditPostImage'/>`
-    : `<img class='previewImage'id='previewEditPostImage'>`) +
+    ? `<img class='previewImage autoHeight' src=${image} id='previewEditPostImage'/>`
+    : `<img class='previewImage autoHeight'id='previewEditPostImage'>`) +
     `
     </div>
     <hr>
@@ -89,4 +89,20 @@ function storeToModal(postId, text, title, image) {
     document.getElementById('editImageDiv').style.height="0px"
   }
   
+  let theme='light'
+  function changeTheme(){
+    if(theme=='light'){
+      document.getElementById('background').style.backgroundColor='rgb(71, 71, 71)'
+      document.querySelector('.menu').style.backgroundColor='rgb(110, 102, 92)'
+      document.querySelector('.newPostButton').classList.replace('btn-outline-secondary', 'btn-dark')
+      document.querySelectorAll('.darkmodeBtn').forEach(function(item){item.classList.replace('btn-light', 'btn-dark');})
+      theme='dark'
+    }else{
+      document.getElementById('background').style.backgroundColor= 'rgb(241, 233, 224)'
+      document.querySelector('.menu').style.backgroundColor='rgb(202, 191, 178)'
+      document.querySelector('.newPostButton').classList.replace('btn-dark', 'btn-outline-secondary')
+      document.querySelectorAll('.darkmodeBtn').forEach(function(item){item.classList.replace('btn-dark', 'btn-light');})
+      theme='light'
+    }
+  }
   

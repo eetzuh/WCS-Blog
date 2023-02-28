@@ -5,8 +5,8 @@ include './getData.php';
 function storeEditedData()
 {
    $oldData = getDB();
-   foreach($oldData as $key => $value ){
-      if($value==""){
+   foreach ($oldData as $key => $value) {
+      if ($value == "") {
          unset($oldData[$key]);
       }
    }
@@ -26,12 +26,13 @@ function storeEditedData()
       move_uploaded_file($imageTmp, $imageDestination);
       var_dump("name value");
    }
-   $editedPost=[];
-   $postIndex=0;
+   $editedPost = [];
+   $postIndex = 0;
    foreach ($oldData as &$selectedPost) {
       $postIndex++;
       if ($selectedPost['id'] == $id) {
-         if(($_POST['title']==$selectedPost['title'])&& ($_POST['text']==$selectedPost['text'])&& $_FILES['image']['name']==""){
+         //fix this
+         if (($_POST['title'] == $selectedPost['title']) && ($_POST['text'] == $selectedPost['text']) && ($_FILES['image']['name'] == $_POST['previousImage'])) {
             header('location:./mainpage.php');
             return;
          }
@@ -43,13 +44,13 @@ function storeEditedData()
          } else {
             if ($_POST['previousImage'] !== "null") {
                $selectedPost['image'] = $_POST['previousImage'];
-            }else{
+            } else {
                unlink($selectedPost['image']);
                unset($selectedPost['image']);
             }
          }
          $selectedPost['date'] = date('d/m/y');
-         $editedPost=$selectedPost;
+         $editedPost = $selectedPost;
          break;
       }
    }
@@ -61,4 +62,4 @@ function storeEditedData()
 ;
 storeEditedData();
 header('location:./mainpage.php')
-?>
+   ?>

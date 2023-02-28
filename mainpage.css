@@ -1,33 +1,39 @@
 body {
   background-color: rgb(241, 233, 224);
 }
-.menuContainer{
+
+.shadow{
   box-shadow: 0px 8px 15px -3px rgb(160, 149, 139);
-  background-color: rgb(202, 191, 178);
-  height: 115px;
+}
+.hrColor{
+  background-color: rgb(160, 81, 35);
 }
 .hrBottom{
   margin: 0;
-  background-color: rgb(160, 81, 35);
 }
 .hrTop{
+  margin-top: 0;
   margin-bottom: 0;
-  background-color: rgb(160, 81, 35);
 }
 .menu {
-  margin-top: 8px;
-  height: 95px;
+  height: 110px;
   background-color: rgb(202, 191, 178);
-  display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.themeButton{
+ border: none;
+ background-color: transparent;
+ margin-right:10px;
 }
 .homepage{
   margin-left: 150px;
 }
+.displayFlex{
+  display: flex;
+}
 .searchDiv{
   margin-right: 150px;
-  display: flex;
   align-items: center;
 }
 .searchField {
@@ -43,10 +49,10 @@ body {
   transition: width 0.3s ease-in-out;
 }
 .searchButton{
-  padding: 5px;
   border: none;
   background-color: transparent;
   margin-right: 20px;
+  margin-left: 5px;
 }
 .logOut{
   margin-left: 30px;
@@ -55,7 +61,6 @@ body {
   margin-top:10px
 }
 .newPostButtonDiv {
-  display: flex;
   align-items: center;
   height: 80px;
   margin-top: 20px;
@@ -80,7 +85,6 @@ body {
 }
 .formDiv{
     width:750px;
-    display: flex;
     flex-direction: column;
 }
 .uploadImage {
@@ -93,12 +97,14 @@ body {
 .uploadImage:hover {
   background-color: rgb(132, 158, 150);
 }
+.autoHeight{
+  height: auto;
+}
 #text {
   resize: none;
   margin-bottom: 15px;
   padding: 15px;
   font-size: 20px;
-  height: auto;
 }
 .closeNewPostDiv {
   width: 30px;
@@ -120,7 +126,6 @@ button{
 }
 .postsContainer{
   align-items: center;
- display: flex;
  flex-wrap: wrap;
  margin-top: 35px;
 }
@@ -128,6 +133,7 @@ button{
   margin-left: 70px;
   margin-bottom: 120px;
   height: fit-content;
+  background-color: rgba(255, 255, 255, 0.479);
 }
 .posts:hover{
   box-shadow: 0px 8px 15px -3px rgb(160, 149, 139);
@@ -141,7 +147,6 @@ button{
   padding-left: 10px;
 }
 .titleDiv{
-  display: flex;
   flex-direction: column;
 }
 .imgContainer{
@@ -155,7 +160,6 @@ button{
   margin-left: 70px;
 }
 .postButtons{
-  display: flex;
   justify-content: space-between;
 }
 #modalBody{
@@ -171,13 +175,8 @@ button{
 }
 #previewNewPostImage{
   width:200px;
-  height: auto;
 }
 #previewEditPostImage{
   width: 100px;
-  height: auto;
   margin-top: 15px;
-}
-#editImageDiv{
-  height: auto;
 }

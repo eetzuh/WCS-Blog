@@ -17,21 +17,19 @@ include "./getData.php"
     <title>Blog</title>
 </head>
 
-<body>
+<body id='background'>
     <header class='sticky-top'>
-        <div class='menuContainer'>
-            <hr class="hrTop">
-            <div class="menu">
+            <div class="menu displayFlex shadow">
                 <div class="homepage">
-                    <a class="btn btn-light" href='./mainpage.php' ;>Homepage</a>
+                    <a class="btn btn-light darkmodeBtn" href='./mainpage.php';>Homepage</a>
                 </div>
-                <div class="searchDiv">
+                <div class="searchDiv displayFlex">
                     <!-- add theme switch -->
-                    <!-- <button class='theme'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    <button class='themeButton displayFlex' onclick='changeTheme()'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-sun-fill" viewBox="0 0 16 16">
                             <path
                                 d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
-                        </svg></button> -->
+                        </svg></button>
                     <form action="./mainpage.php" method="get">
                         <input class="searchField" type="text" name="term">
                         <button type="submit" class='searchButton'><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -41,36 +39,35 @@ include "./getData.php"
                             </svg>
                         </button>
                     </form>
-                    <a class="btn btn-light" href="./" class="logOut">Log Out</a>
+                    <a class="btn btn-light darkmodeBtn" href="./" class="logOut">Log Out</a>
                 </div>
             </div>
-            <hr class="hrBottom">
-        </div>
+            <hr class="hrBottom hrColor">
     </header>
 
 
-    <div class="newPostButtonDiv">
+    <div class="newPostButtonDiv displayFlex">
         <button class="newPostButton btn btn-outline-secondary" onclick="newPostDivToggle()">New Post</button>
     </div>
     <div class="newPostDiv">
         <button class="closeNewPostDiv btn btn-outline-danger" onclick="closeDiv()">X </button>
-        <form action="./storeData.php" class="formDiv" method="POST" enctype="multipart/form-data">
-            <div class='titleDiv'>
+        <form action="./storeData.php" class="formDiv displayFlex" method="POST" enctype="multipart/form-data">
+            <div class='titleDiv displayFlex'>
                 <label for='title' class="form-label" style="font-size:20px"> Title</label>
                 <input type="text" class='form-control' name="title" id='title' required>
             </div>
-            <textarea class='form-control' name="text" id="text" cols="30" rows="10" placeholder="Add description"
+            <textarea class='form-control autoHeight' name="text" id="text" cols="30" rows="10" placeholder="Add description"
                 onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
             <div class='buttonsWrapper'>
             <label for="images" class="uploadImage btn btn-outline-secondary">Add Image</label>
             <p class='btn btn-outline-danger' id='removeImageBtn' onclick="previewNewPostImage.removeAttribute('src');document.querySelectorAll('#images')[0].value=''">Remove image</p>
             </div>
             <input name="image" type="file" accept="image/*" onchange='showNewPostImage()' id="images" style='display:none'>
-            <img class='previewImage' tabindex="-1" id='previewNewPostImage'/>
+            <img class='previewImage autoHeight' tabindex="-1" id='previewNewPostImage'/>
             <button type="submit" class="submitButton btn btn-outline-success">Post</button>
         </form>
     </div>
-    <div class="postsContainer">
+    <div class="postsContainer displayFlex">
         <?php
         $data = getDB();
         if (key_exists('term', $_GET)) {
@@ -141,7 +138,7 @@ include "./getData.php"
                             <span style='white-space:pre' class=\"card-text\" value=\"$textValue\" id='text_$id'>$text</span>
                             <p class='postDate'id='date_$id'>$date</p>
                             <br>
-                            <div class='postButtons'>
+                            <div class='postButtons displayFlex'>
                             <form action='./deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
@@ -158,7 +155,7 @@ include "./getData.php"
                             <span style='white-space:pre' class=\"card-text\" value=\"$textValue\" id='text_$id'>$text</span>
                             <p class='postDate' id='date_$id'>$date</p>
                             <br>
-                            <div class='postButtons'>
+                            <div class='postButtons displayFlex'>
                             <form action='./deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
@@ -174,7 +171,7 @@ include "./getData.php"
                         <h5 class=\"card-title\" value=\"$title\" id='title_$id'>$title</h5>
                             <p class='postDate' id='date_$id'>$date</p>
                             <br>
-                            <div class='postButtons'>
+                            <div class='postButtons displayFlex'>
                             <form action='./deletePost.php' method='POST'>
                             <input name='postId' type='hidden' value=\"$id\"</input>
                             <button class=\"btn btn-outline-danger\">Delete post</button>
